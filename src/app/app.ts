@@ -13,7 +13,7 @@ import { Book, CreateBookRequest } from './models/book.model';
 })
 export class App implements OnInit {
   private http = inject(HttpClient);
-  protected readonly title = signal('Library Management System');
+  protected readonly title = signal('Kütüphane Yönetim Sistemi');
 
   protected books = signal<Book[]>([]);
 
