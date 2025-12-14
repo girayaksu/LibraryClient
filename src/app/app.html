@@ -1,0 +1,97 @@
+<div class="container">
+  <header>
+    <h1>{{ title() }}</h1>
+  </header>
+
+  <main>
+    <section class="form-section">
+      <h2>Yeni Kitap Ekle</h2>
+      <form (submit)="addBook($event)">
+        <div class="form-group">
+          <label for="title">Kitap Başlığı:</label>
+          <input
+            type="text"
+            id="title"
+            [value]="newBookTitle()"
+            (input)="onNewBookTitleChange($event)"
+            required
+            placeholder="Kitap başlığını giriniz"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="isbn">ISBN:</label>
+          <input
+            type="text"
+            id="isbn"
+            [value]="newBookISBN()"
+            (input)="onNewBookISBNChange($event)"
+            required
+            placeholder="ISBN numarasını giriniz"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="publishedYear">Yayın Yılı:</label>
+          <input
+            type="number"
+            id="publishedYear"
+            [value]="newBookPublishedYear()"
+            (input)="onNewBookPublishedYearChange($event)"
+            required
+            min="1900"
+            max="2100"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="authorId">Yazar ID:</label>
+          <input
+            type="number"
+            id="authorId"
+            [value]="newBookAuthorId()"
+            (input)="onNewBookAuthorIdChange($event)"
+            required
+            min="1"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="categoryId">Kategori ID:</label>
+          <input
+            type="number"
+            id="categoryId"
+            [value]="newBookCategoryId()"
+            (input)="onNewBookCategoryIdChange($event)"
+            required
+            min="1"
+          />
+        </div>
+
+        <button type="submit" class="btn-submit">Kitap Ekle</button>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <h2>Kitap Listesi</h2>
+      @if (books().length === 0) {
+        <p class="no-data">Henüz kitap bulunmamaktadır.</p>
+      } @else {
+        <div class="books-grid">
+          @for (book of books(); track book.id) {
+            <div class="book-card">
+              <h3>{{ book.title }}</h3>
+              <div class="book-details">
+                <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+                <p><strong>Yayın Yılı:</strong> {{ book.publishedYear }}</p>
+                <p><strong>Yazar ID:</strong> {{ book.authorId }}</p>
+                <p><strong>Kategori ID:</strong> {{ book.categoryId }}</p>
+                <p><strong>Durum:</strong> {{ book.status }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </section>
+  </main>
+</div>
